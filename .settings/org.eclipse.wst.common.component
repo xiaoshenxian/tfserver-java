@@ -8,6 +8,9 @@
         <dependent-module archiveName="javaxsx-0.0.9.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javaxsx/javaxsx">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="tfserver-core-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/tfserver-core/tfserver-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="tfserver"/>
         <property name="java-output-path" value="/tfserver-java/target/classes"/>
     </wb-module>

@@ -9,7 +9,7 @@
 
 	<properties>
 		<javaxsx.version>0.0.9</javaxsx.version>
-		<tfserver.core.version>0.0.1-SNAPSHOT</tfserver.core.version>
+		<tfserver.core.version>0.0.1</tfserver.core.version>
 		<org.springframework.version>5.0.7.RELEASE</org.springframework.version>
 		<urlrewritefilter.version>4.0.4</urlrewritefilter.version>
 		<mybatis.version>3.4.6</mybatis.version>
