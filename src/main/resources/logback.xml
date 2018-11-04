@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{ISO8601} | %level | %thread %class.%M:%L | %logger{1} | %m%n%rEx</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+	</appender>
+
+	<appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${catalina.base}/logs/monitor.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${catalina.base}/logs/monitor.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
+			<maxHistory>48</maxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{ISO8601} | %level | %thread %class.%M:%L | %logger{1} | %m%n%rEx</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+	</appender>
+
+	<appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${catalina.base}/logs/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${catalina.base}/logs/error.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
+			<maxHistory>48</maxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{ISO8601} | %level | %thread %class.%M:%L | %logger{1} | %m%n%rEx</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="console" />
+		<appender-ref ref="info" />
+		<appender-ref ref="error" />
+	</root>
+</configuration>
