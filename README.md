@@ -87,18 +87,18 @@ An example of a server return:
 
 ```json
 {
-    "status": // return status
+    "status":
     {
-        "code":0, // status code
-        "des":""  // status description
+        "code":0,
+        "des":""
     },
-    "data": // result
+    "data":
     {
         "the_output":
         {
             "type":"DT_FLOAT",
             "shape": [1, 16],
-            data:
+            "data":
             [
                 [
                     -0.96606535,
