@@ -183,6 +183,15 @@ As mentioned above, the server uses models exported by the TensorFlow protocol. 
 
 In this server framework, an optional configuration file named "*conf*" can be placed at any of those directories or sub-directories, with a property named "*worker_num*" which defines the user specified worker number for all versions under the model directory where the "*conf*" file placed, or for the exact version represented by the sub-directory where the "*conf*" file placed.
 
+#### About the "*config.properties*" file
+
+This is the server configuration file for a specified Maven build profile. The configuration descriptions are shown below:
+- `model_base_dir`: the base directory to place the TensorFlow exported models.
+- `default_worker_num`: the default worker number of each model, as described above.
+- `max_worker_num`: the maximum worker number of each model, as described above.
+- `grpc_port`: the GRPC service port. Unlike the HTTP Json port which is specified in the Tomcat configuration file, the GRPC port should be specified here.
+- `update_schedule_seconds`: In what frequency the server should refresh the "*model_base_dir*" to schedule an updating.
+
 ## Authors
 
 * **ZHONG Weikun**
