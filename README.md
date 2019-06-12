@@ -184,6 +184,8 @@ This is the default model handler configuration file that is to be used to defin
 
 Other parameters can be added for user specified *ModelHandler* implementations, e.g., distributed deployment.
 
+A "conf" file can be added to both the model name path and the model version path to modify the default parameters or add other parameters.
+
 ## Authors
 
 * **ZHONG Weikun**
