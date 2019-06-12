@@ -176,6 +176,14 @@ This is the server configuration file for a specified Maven build profile. The c
 - `grpc_port`: the GRPC service port. Unlike the HTTP Json port which is specified in the Tomcat configuration file, the GRPC port should be specified here.
 - `update_schedule_seconds`: In what frequency the server should refresh the "*model_base_dir*" to schedule an updating.
 
+#### About the "*handler.properties*" file
+
+This is the default model handler configuration file that is to be used to define a *ModelHandler*'s behavior. The configuration descriptions are shown below:
+- `handler_class`: the specified class of the *ModelHandler*. This server uses the *LocalModelHandler* class which stores the Tensorflow model session in the local memory.
+- `tags`: used by *SavedModelBundle* instances. See Tensorflow documents for detail. Defaulted by "serve" here.
+
+Other parameters can be added for user specified *ModelHandler* implementations, e.g., distributed deployment.
+
 ## Authors
 
 * **ZHONG Weikun**
