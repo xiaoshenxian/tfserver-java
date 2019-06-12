@@ -169,26 +169,10 @@ The GRPC interface is implemented according to the [official GRPC guide](https:/
 
 The core data flow apart from the server framework is provided by the [tfserver-core](https://github.com/xiaoshenxian/tfserver-core). Please refer to the related classes for detail.
 
-#### Control the worker number for each model
-
-There is a mechanism to control the worker number for each model, aiming to balance computing resources. The worker number of a model here means the number of instances a specified model running simultaneously, in other word, the number of *Model* instances maintained by the specified *ModelHandler* object. See these two classes in the [tfserver-core](https://github.com/xiaoshenxian/tfserver-core) for detail.
-
-##### Global settings
-
-In the profile configuration file "*config.properties*", the "*default_worker_num*" property controls the default worker number of each model if there is no other specification, and the "*max_worker_num*" property prevents every **user-specified** worker number from exceeding this maximum.
-
-##### User specified worker number
-
-As mentioned above, the server uses models exported by the TensorFlow protocol. According to the protocol, each exported TensorFlow model has a root directory containing its different versions, with each version in an independent sub-directory.
-
-In this server framework, an optional configuration file named "*conf*" can be placed at any of those directories or sub-directories, with a property named "*worker_num*" which defines the user specified worker number for all versions under the model directory where the "*conf*" file placed, or for the exact version represented by the sub-directory where the "*conf*" file placed.
-
 #### About the "*config.properties*" file
 
 This is the server configuration file for a specified Maven build profile. The configuration descriptions are shown below:
 - `model_base_dir`: the base directory to place the TensorFlow exported models.
-- `default_worker_num`: the default worker number of each model, as described above.
-- `max_worker_num`: the maximum worker number of each model, as described above.
 - `grpc_port`: the GRPC service port. Unlike the HTTP Json port which is specified in the Tomcat configuration file, the GRPC port should be specified here.
 - `update_schedule_seconds`: In what frequency the server should refresh the "*model_base_dir*" to schedule an updating.
 

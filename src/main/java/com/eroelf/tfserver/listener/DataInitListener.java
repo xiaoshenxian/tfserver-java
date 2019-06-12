@@ -44,16 +44,16 @@ public class DataInitListener implements ServletContextListener
 		LOGGER.info("Begin initialization...");
 		try
 		{
-			Properties properties=new Properties();
-			properties.load(DataInitListener.class.getResourceAsStream("/config.properties"));
-			modelPool=new ModelPool(properties.getProperty("model_base_dir"));
-			int defaultWorkerNum=Integer.parseInt(properties.getProperty("default_worker_num"));
-			int maxWorkerNum=Integer.parseInt(properties.getProperty("max_worker_num"));
-			modelPool.update(defaultWorkerNum, maxWorkerNum);
+			Properties config=new Properties();
+			config.load(DataInitListener.class.getResourceAsStream("/config.properties"));
+			Properties defaultModelHandlerProperties=new Properties();
+			defaultModelHandlerProperties.load(DataInitListener.class.getResourceAsStream("/handler.properties"));
+			modelPool=new ModelPool(config.getProperty("model_base_dir"), defaultModelHandlerProperties);
+			modelPool.update();
 			ses.scheduleWithFixedDelay(() -> {
-				modelPool.update(defaultWorkerNum, maxWorkerNum);
-			}, 0, Integer.parseInt(properties.getProperty("update_schedule_seconds")), TimeUnit.SECONDS);
-			grpcController=new TfGrpcController(Integer.parseInt(properties.getProperty("grpc_port")));
+				modelPool.update();
+			}, 0, Integer.parseInt(config.getProperty("update_schedule_seconds")), TimeUnit.SECONDS);
+			grpcController=new TfGrpcController(Integer.parseInt(config.getProperty("grpc_port")));
 			grpcController.start();
 			LOGGER.info("Initialization finished");
 		}
