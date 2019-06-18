@@ -2,7 +2,7 @@
 
 A TensorFlow server implemented in Java.
 
-This project uses the Tomcat server framework and the [tfserver-core](https://github.com/xiaoshenxian/tfserver-core) jar to provide a Java version TensorFlow server for both HTTP Json and GRPC request interface.
+This project uses the Tomcat server framework and the [tfserver-core](https://github.com/xiaoshenxian/tfserver-core) jar to provide a Java version TensorFlow server for both HTTP Json and GRPC request interfaces.
 
 ## Usage
 
@@ -18,17 +18,17 @@ The [tfserver-core](https://github.com/xiaoshenxian/tfserver-core) jar is requir
 
 ### Requester from clients
 
-Generally, a request contains two part of data, the first one called *Sample* and the second one called *Param*. A *Sample* contains all the information needed to inference a TensorFlow model. A *Param* is information other than those required by TensorFlow model, so that it is optional, and in this case, it contains only one field called "trace" which is used for request tracing.
+Generally, a request contains two part of data, the first one called *Sample* and the second one called *Param*. A *Sample* contains all the information needed to infer a TensorFlow model. A *Param* contains information that other than those required by TensorFlow models, so that it is optional, and in this case, it contains only one field called "trace" which is used for request tracing.
 
 A *Sample* instance contains:
 1. Model name.
-2. Model version (optional, if not provided, the server will choose the newest version based on the model create time).
+2. Model version (optional, if not provided, the server will choose the newest version based on the model exported time).
 3. Signature.
-4. Inputs. This is basically a map contains inputs name as key, and tensor data as values. Data transfer mechanism has been provided by *ArrayWrapper*s, users need only to provide the inputs' shapes and the real data, the server will converts them automatically. Data types can also be provided to *ArrayWrapper*s, but the server uses data types provided from those exported models, so the user provided ones will only be used for logging.
+4. Inputs. This is basically a map contains inputs' name as key, and tensor data as values. Data transfer mechanism has been provided by *ArrayWrapper*s, users need only to provide the inputs' shapes and the real data, the server will converts them automatically. Data types can also be provided to *ArrayWrapper*s, but the server uses data types provided from those exported models, so the user provided ones will only be used for logging.
 
-For each request, the server will return a data structure contains two part of data. The *Status* gives the return status with code=0 for normal return, other code and the related information can be found in the [tfserver-core](https://github.com/xiaoshenxian/tfserver-core) jar. The *Data* contains all outputs of the model, which has the same data structure as the *Sample*'s inputs.
+For each request, the server will return a data structure contains two parts of information, the *Status* and the *Data*. The *Status* gives the return status with code=0 for normal return, other code and the related information can be found in the [tfserver-core](https://github.com/xiaoshenxian/tfserver-core) jar. The *Data* contains all outputs of the model, which has the same data structure as the *Sample*'s inputs.
 
-Please refer to the [exported TensorFlow models](https://www.tensorflow.org/serving/serving_basic#train_and_export_tensorflow_model) for the definitions of the model name, model version, signature, inputs name, and outputs name.
+Please refer to the [exported TensorFlow models](https://www.tensorflow.org/serving/serving_basic#train_and_export_tensorflow_model) for the definitions of the model name, model version, signature, inputs' name, and outputs' name.
 
 There are two kinds of clients this server supports, one is GRPC clients, the other is HTTP Json clients. **It is highly recommended to use the GRPC other than HTTP Json in production environments.**
 
@@ -126,7 +126,7 @@ An example of a server return:
 
 ##### Data structures
 
-The Java *List* data convert tools and the "sample" request parameter can be found in the *ArrayWrapper4J* class and *Sample4J* class of the [tfserver-core](https://github.com/xiaoshenxian/tfserver-core). Blow gives a snapshot of the additional "*Param*" parameter and the "*Response*" data structure.
+The Java *List* data converting tools and the "sample" request parameters can be found in the *ArrayWrapper4J* class and *Sample4J* class from the [tfserver-core](https://github.com/xiaoshenxian/tfserver-core). Blow gives a snapshot of the additional "*Param*" parameter and the "*Response*" data structure.
 
 ```java
 // in Param.java
@@ -167,7 +167,7 @@ The GRPC request entrance is the *[TfServiceGrpc](./src/main/java/com/eroelf/tfs
 
 The GRPC interface is implemented according to the [official GRPC guide](https://grpc.io/docs/tutorials/basic/java.html), while the HTTP Json interface is implemented by using Tomcat.
 
-The core data flow apart from the server framework is provided by the [tfserver-core](https://github.com/xiaoshenxian/tfserver-core). Please refer to the related classes for detail.
+The core data flow apart from the server framework is provided by the [tfserver-core](https://github.com/xiaoshenxian/tfserver-core). Please refer to the related classes for details.
 
 #### About the "*config.properties*" file
 
@@ -184,7 +184,7 @@ This is the default model handler configuration file that is to be used to defin
 
 Other parameters can be added for user specified *ModelHandler* implementations, e.g., distributed deployment.
 
-A "conf" file can be added to both the model name path and the model version path to modify the default parameters or add other parameters.
+A "conf" file can be added to both the model name paths and the model version paths to modify the default parameters or add other parameters.
 
 ## Authors
 
