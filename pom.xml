@@ -8,8 +8,8 @@
 	<version>0.0.1</version>
 
 	<properties>
-		<javaxsx.version>0.1.0</javaxsx.version>
-		<tfserver.core.version>0.0.2</tfserver.core.version>
+		<javaxsx.version>0.1.1</javaxsx.version>
+		<tfserver.core.version>0.0.3</tfserver.core.version>
 		<org.springframework.version>5.0.7.RELEASE</org.springframework.version>
 		<urlrewritefilter.version>4.0.4</urlrewritefilter.version>
 		<mybatis.version>3.4.6</mybatis.version>
